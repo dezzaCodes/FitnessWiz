@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ExerciseName = ({ setExerciseName }) => {
     function getExercise(event) {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setExerciseName(event.target.value);
     }
     

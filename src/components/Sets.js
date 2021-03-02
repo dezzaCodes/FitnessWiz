@@ -11,7 +11,7 @@ const Sets = ({ numSets, setNumSets }) => {
     }
 
     function getSets(event) {
-        console.log(event.target.id.slice(-1));
+        // console.log(event.target.id.slice(-1));
         document.getElementById('set-' + numSets).classList.remove('btn-selected')
         document.getElementById(event.target.id).classList.add('btn-selected')
         setNumSets(parseInt(event.target.id.slice(-1)));

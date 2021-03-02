@@ -5,7 +5,7 @@ import './style.css'
 const Reps = ({ numSets, numReps, weights, setNumReps, setWeights }) => {
     function generateRepsButtons() {
         var allRepButtons = [];
-        allRepButtons.push();
+        // allRepButtons.push();
         for (var i = 0 ; i < numSets ; i++) {
             var repButtons = [];
             repButtons.push(<div/>);
@@ -22,7 +22,7 @@ const Reps = ({ numSets, numReps, weights, setNumReps, setWeights }) => {
     }
 
     function getReps(event) {
-        console.log(event.target.innerHTML);
+        // console.log(event.target.innerHTML);
         if (document.getElementById('rep-' + numReps[event.target.id.slice(-1)] + '-' + event.target.id.slice(-1))) {
             document.getElementById('rep-' + numReps[event.target.id.slice(-1)] + '-' + event.target.id.slice(-1)).classList.remove('btn-selected')
         }
@@ -35,7 +35,7 @@ const Reps = ({ numSets, numReps, weights, setNumReps, setWeights }) => {
     }
 
     function getWeights(event) {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         const newWeights = weights.slice();
         var index = parseInt(event.target.id.slice(-1));
         newWeights[index] = event.target.value;

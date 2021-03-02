@@ -5,6 +5,7 @@ import DisplayWorkouts from './DisplayWorkouts';
 import ExerciseName from './ExerciseName'
 import Sets from './Sets';
 import Reps from './Reps';
+import SelectExercise from './SelectExercise'
 
 const Exercise = () => {
     var [numSets, setNumSets] = useState(0);
@@ -13,16 +14,14 @@ const Exercise = () => {
     var [exerciseName, setExerciseName] = useState('');
     var [muscleGroup, setMuscleGroup] = useState([]);
     var [workouts, setWorkouts] = useState([]);
+    var [exercises, setExercises] = useState([]);
+    var [exerciseSelected, setExerciseSelected] = useState('');
 
     function onSubmit(event) {
-        console.log(event);
-        for (var i = 0 ; i < event.target.form.length ; i++) {
-            console.log(event.target.form[i].value);
-        }
+        // console.log(event);
 
         var workout = {
-            'exerciseName': exerciseName,
-            'muscleGroup': muscleGroup,
+            'exerciseName': exerciseSelected,
             'numSet': numSets,
             'numReps': numReps.slice(0, numSets),
             'weights': weights.slice(0, numSets),
@@ -38,13 +37,8 @@ const Exercise = () => {
             })
         });
 
-        document.getElementById('exercise-name').value = '';
-        setExerciseName('');
-
-        for (var k = 0 ; k < muscleGroup.length ; k++) {
-            document.getElementById(muscleGroup[k]).classList.remove('btn-selected')
-        }
-        setMuscleGroup([]);
+        document.getElementById('exercise-selected').value = 'default';
+        setExerciseSelected('');
 
         document.getElementById('set-' + numSets).classList.remove('btn-selected');
         setNumSets(0);
@@ -55,15 +49,64 @@ const Exercise = () => {
         setNumReps([]);
         setWeights([]);    
     }
+    
+    function onSubmitExercise(event) {
+        var exercise = {
+            'exerciseName': exerciseName,
+            'muscleGroup': muscleGroup,
+        };
+
+        console.log(exercise);
+        setExercises([...exercises, exercise]);
+
+        fetch('/exercise', {
+            method: 'POST',
+            body: JSON.stringify({
+                content: exercise
+            })
+        });
+
+        document.getElementById('exercise-name').value = '';
+        setExerciseName('');
+
+        for (var k = 0 ; k < muscleGroup.length ; k++) {
+            document.getElementById(muscleGroup[k]).classList.remove('btn-selected')
+        }
+        setMuscleGroup([]);
+    }
+
+    function exerpt() {
+        var ans = []
+        ans.push(<div key='exerpt'/>)
+
+        for (var i = 0 ; i < exercises.length ; i++) {
+            var result = ''
+            result += i.toString() + '. '
+            result += exercises[i]['exerciseName'] + ' | '
+            result += exercises[i]['muscleGroup']
+            ans.push (result)
+            ans.push (<br/>)
+        }
+        return ans;
+    }
 
     return (
         <form> 
             <ExerciseName setExerciseName={setExerciseName} />
-            <MuscleGroup muscleGroup={muscleGroup} setMuscleGroup={setMuscleGroup} /><br/>
-            <Sets numSets={numSets} setNumSets={setNumSets} />
+            {exerciseName !== '' && <MuscleGroup muscleGroup={muscleGroup} setMuscleGroup={setMuscleGroup} />}
+            <br/>
+            {exercises.length !== 0 && exerpt()}
+            {muscleGroup.length !== 0 && <Button label='Submit' id='submit-exercise' onClick={onSubmitExercise} />}
+
+            <br/>
+            <br/>
+
+            <SelectExercise exercises={exercises} setExerciseSelected={setExerciseSelected} />
+
+            {exerciseSelected !== '' && <Sets numSets={numSets} setNumSets={setNumSets} />}
             {numSets !== 0 && <Reps numSets={numSets} numReps={numReps} weights={weights} setNumReps={setNumReps} setWeights={setWeights}/>}
-            { workouts !== 0 && <DisplayWorkouts workouts={workouts} />}
-            <Button label='Submit' id='submit' onClick={onSubmit} />
+            {workouts.length !== 0 && <DisplayWorkouts workouts={workouts} />}
+            {weights.length === numSets && numSets !== 0 && <Button label='Submit' id='submit' onClick={onSubmit} />}
         </form>
     )
 }

@@ -9,10 +9,9 @@ const DisplayWorkouts = ({ workouts }) => {
         for (var i = 0 ; i < workouts.length ; i++) {
             var result = ''
             result += i.toString() + '. '
-            result += workouts[i]['exerciseName'] + ' '
-            result += workouts[i]['muscleGroup'] + ' '
-            result += workouts[i]['numSet'] + ' '
-            result += workouts[i]['numReps'] + ' '
+            result += workouts[i]['exerciseName'] + ' | '
+            result += workouts[i]['numSet'] + ' | '
+            result += workouts[i]['numReps'] + ' | '
             result += workouts[i]['weights']
             ans.push (result)
             ans.push (<br/>)
