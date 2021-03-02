@@ -1,0 +1,16 @@
+.btn-selected {
+    background-color: rgb(151, 142, 142)
+}
+
+.btn-unselected {
+    background-color: rgb(243, 234, 234)
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
