@@ -8,8 +8,8 @@ export const ExerciseName = ({ setExerciseName }) => {
     
     return (
         <div>
-            <label htmlFor="exercise-name">Exercise</label><br/>
-            <input type="text" id='exercise-name' placeholder="Enter exercise" onChange={(e) => getExercise(e)} /><br/><br/>
+            <label htmlFor="exercise-name">Exercise: </label>
+            <input type="text" id='exercise-name'  className="form-control-md" placeholder="Enter exercise" onChange={(e) => getExercise(e)} /><br/><br/>
         </div>
     )
 }

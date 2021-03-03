@@ -21,22 +21,21 @@ const MuscleGroup = ({ muscleGroup, setMuscleGroup }) => {
             <label htmlFor="muscle_groups">Muscle Groups</label><br/>
             <div className="btn-group" role="group" aria-label="Basic example">
                 <div>
-                    <Button label='Chest' id='chest' onClick={getMuscleGroups} />
-                    <Button label='Shoulders' id='shoulders' onClick={getMuscleGroups} />
-                    <Button label='Triceps' id='triceps' onClick={getMuscleGroups} />
+                    <Button label='Chest' id='chest' cls='btn-unselected btn-left' onClick={getMuscleGroups} />
+                    <Button label='Shoulders' id='shoulders' cls='btn-unselected' onClick={getMuscleGroups} />
+                    <Button label='Triceps' id='triceps' cls='btn-unselected' onClick={getMuscleGroups} />
                 </div>
                 <div>
-                    <Button label='Back' id='back' onClick={getMuscleGroups} />
-                    <Button label='Biceps' id='biceps' onClick={getMuscleGroups} />
-                    <Button label='Abs' id='abs' onClick={getMuscleGroups} />
+                    <Button label='Back' id='back' cls='btn-unselected' onClick={getMuscleGroups} />
+                    <Button label='Biceps' id='biceps' cls='btn-unselected' onClick={getMuscleGroups} />
+                    <Button label='Abs' id='abs' cls='btn-unselected' onClick={getMuscleGroups} />
                 </div>
                 <div>
-                    <Button label='Quads' id='quads' onClick={getMuscleGroups} />
-                    <Button label='Hamstrings' id='hamstrings' onClick={getMuscleGroups} />
-                    <Button label='Calves' id='calves' onClick={getMuscleGroups} />
+                    <Button label='Quads' id='quads' cls='btn-unselected' onClick={getMuscleGroups} />
+                    <Button label='Hamstrings' id='hamstrings' cls='btn-unselected' onClick={getMuscleGroups} />
+                    <Button label='Calves' id='calves' cls='btn-unselected btn-right' onClick={getMuscleGroups} />
                 </div>
             </div>
-            <br/>
         </>
     )
 }

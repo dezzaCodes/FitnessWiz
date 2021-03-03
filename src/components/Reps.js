@@ -11,8 +11,13 @@ const Reps = ({ numSets, numReps, weights, setNumReps, setWeights }) => {
             repButtons.push(<div/>);
             repButtons.push("Reps");
             for (var j = 4 ; j <= 12 ; j++) {
-                repButtons.push(<Button label={j} id={'rep-' + j + '-' + i} onClick={getReps} />);
-                
+                if (j === 4) {
+                    repButtons.push(<Button label={j} id={'rep-' + j + '-' + i} cls='btn-unselected btn-left' onClick={getReps} />);
+                } else if (j === 12) {
+                    repButtons.push(<Button label={j} id={'rep-' + j + '-' + i} cls='btn-unselected btn-right' onClick={getReps} />);
+                } else {
+                    repButtons.push(<Button label={j} id={'rep-' + j + '-' + i} cls='btn-unselected' onClick={getReps} />);
+                }
             }
             repButtons.push("Weight");
             repButtons.push(<input type="number" name="weight" id={'weight-' + i} min="0" onChange={getWeights} />);
@@ -25,8 +30,10 @@ const Reps = ({ numSets, numReps, weights, setNumReps, setWeights }) => {
         // console.log(event.target.innerHTML);
         if (document.getElementById('rep-' + numReps[event.target.id.slice(-1)] + '-' + event.target.id.slice(-1))) {
             document.getElementById('rep-' + numReps[event.target.id.slice(-1)] + '-' + event.target.id.slice(-1)).classList.remove('btn-selected')
+            document.getElementById('rep-' + numReps[event.target.id.slice(-1)] + '-' + event.target.id.slice(-1)).classList.add('btn-unselected')
         }
         document.getElementById(event.target.id).classList.add('btn-selected')
+        document.getElementById(event.target.id).classList.remove('btn-unselected')
 
         const newReps = numReps.slice();
         var index = parseInt(event.target.id.slice(-1));

@@ -15,10 +15,12 @@ const SelectExercise = ({ exercises, setExerciseSelected }) => {
     }
 
     return (
-        <select id='exercise-selected' onChange={(e) => getExerciseSelected(e)}>
-            <option value='default'>Select exercise </option>
-            {generateDropdownMenu()}
-        </select>
+        <div className='form-group'>
+            <select id='exercise-selected' class="form-select" onChange={(e) => getExerciseSelected(e)}>
+                <option value='default'>Select exercise </option>
+                {generateDropdownMenu()}
+            </select>
+        </div>
     )
 }
 

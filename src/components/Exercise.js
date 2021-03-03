@@ -6,6 +6,7 @@ import ExerciseName from './ExerciseName'
 import Sets from './Sets';
 import Reps from './Reps';
 import SelectExercise from './SelectExercise'
+import WelcomeMessage from './WelcomeMessage'
 
 const Exercise = () => {
     var [numSets, setNumSets] = useState(0);
@@ -92,21 +93,25 @@ const Exercise = () => {
 
     return (
         <form> 
-            <ExerciseName setExerciseName={setExerciseName} />
-            {exerciseName !== '' && <MuscleGroup muscleGroup={muscleGroup} setMuscleGroup={setMuscleGroup} />}
-            <br/>
-            {exercises.length !== 0 && exerpt()}
-            {muscleGroup.length !== 0 && <Button label='Submit' id='submit-exercise' onClick={onSubmitExercise} />}
+            
+            <WelcomeMessage />
 
-            <br/>
-            <br/>
+            <div className="jumbotron">
+                <ExerciseName setExerciseName={setExerciseName} />
+                {exerciseName !== '' && <MuscleGroup muscleGroup={muscleGroup} setMuscleGroup={setMuscleGroup} />}
+                {exercises.length !== 0 && exerpt()}
+                {muscleGroup.length !== 0 && <Button label='Submit' id='submit-exercise' cls='btn' onClick={onSubmitExercise} />}
+            </div>
 
-            <SelectExercise exercises={exercises} setExerciseSelected={setExerciseSelected} />
+            <div className="jumbotron">
+                <SelectExercise exercises={exercises} setExerciseSelected={setExerciseSelected} />
 
-            {exerciseSelected !== '' && <Sets numSets={numSets} setNumSets={setNumSets} />}
-            {numSets !== 0 && <Reps numSets={numSets} numReps={numReps} weights={weights} setNumReps={setNumReps} setWeights={setWeights}/>}
-            {workouts.length !== 0 && <DisplayWorkouts workouts={workouts} />}
-            {weights.length === numSets && numSets !== 0 && <Button label='Submit' id='submit' onClick={onSubmit} />}
+                {exerciseSelected !== '' && <Sets numSets={numSets} setNumSets={setNumSets} />}
+                {numSets !== 0 && <Reps numSets={numSets} numReps={numReps} weights={weights} setNumReps={setNumReps} setWeights={setWeights}/>}
+                {workouts.length !== 0 && <DisplayWorkouts workouts={workouts} />}
+                {weights.length === numSets && numSets !== 0 && <Button label='Submit' id='submit-workout' cls='btn' onClick={onSubmit} />}
+            </div>
+            
         </form>
     )
 }
